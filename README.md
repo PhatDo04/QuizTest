@@ -2,6 +2,56 @@
 
 Ứng dụng web trắc nghiệm đa năng, hỗ trợ nhiều đề thi với tính năng phản hồi tức thì và phân trang thông minh.
 
+## 📚 Nội dung bộ câu hỏi
+
+Ứng dụng hiện tại bao gồm **8 đề thi** với tổng cộng **hơn 450 câu hỏi** về Kiểm thử phần mềm (Software Testing) dựa trên chuẩn ISTQB:
+
+### Các đề thi có sẵn:
+
+- **Đề 1 (Q. 1 → Q. 74)**: 50 câu hỏi cơ bản về Software Testing Foundation
+- **Đề 2 (Q. 75 → Q. 154)**: 50 câu hỏi về các kỹ thuật kiểm thử
+- **Đề 3**: 50 câu hỏi về quy trình kiểm thử
+- **Đề 4**: 50 câu hỏi về quản lý kiểm thử
+- **Đề 5**: 50 câu hỏi về công cụ hỗ trợ kiểm thử
+- **Đề 6**: 50 câu hỏi nâng cao về test design
+- **Đề 7**: 50 câu hỏi về kiểm thử tĩnh và động
+- **Đề 8 (Q. 16 → Q. 482)**: Câu hỏi có kèm code và sơ đồ
+
+### Chủ đề bao gồm:
+
+- ✅ **Nguyên tắc cơ bản của kiểm thử** (Testing Fundamentals)
+- ✅ **Quy trình kiểm thử** (Test Process)
+- ✅ **Các mức kiểm thử** (Test Levels)
+  - Component Testing
+  - Integration Testing
+  - System Testing
+  - Acceptance Testing
+- ✅ **Kỹ thuật kiểm thử** (Test Techniques)
+  - Black-box Testing (Equivalence Partitioning, Boundary Value Analysis)
+  - White-box Testing (Statement Coverage, Decision Coverage)
+  - Experience-based Testing
+- ✅ **Quản lý kiểm thử** (Test Management)
+  - Test Planning
+  - Test Monitoring and Control
+  - Configuration Management
+  - Risk Management
+- ✅ **Công cụ kiểm thử** (Test Tools)
+  - Test Management Tools
+  - Static Analysis Tools
+  - Performance Testing Tools
+- ✅ **Kiểm thử tĩnh** (Static Testing)
+  - Reviews
+  - Static Analysis
+- ✅ **Phân tích độ phức tạp** (Cyclomatic Complexity)
+
+### Đặc điểm câu hỏi:
+
+- 📝 **Đa dạng định dạng**: Câu hỏi lý thuyết, bài tập thực hành, phân tích code
+- 🖼️ **Có hình ảnh minh họa**: Sơ đồ trạng thái, bảng quyết định, flowchart
+- 💻 **Code examples**: Câu hỏi có đoạn mã để phân tích độ bao phủ
+- 📊 **Bảng và biểu đồ**: Decision tables, state transition diagrams
+- ✏️ **Giải thích chi tiết**: Mỗi câu đều có lời giải và tham chiếu lý thuyết
+
 ## ✨ Tính năng chính
 
 ### 🎯 Quản lý đề thi
