@@ -281,7 +281,7 @@ Mọi đóng góp đều được hoan nghênh! Vui lòng:
 
 ## 📄 License
 
-Dự án này được phát hành dưới MIT License.
+Dự án này được phát hành cho mục đích học tập.
 
 ## 👨‍💻 Tác giả
 
