@@ -9,6 +9,9 @@ let userAnswers = {};
 // Khởi tạo ứng dụng
 document.addEventListener("DOMContentLoaded", () => {
   loadQuizData();
+
+  // Xử lý sự kiện back/forward của trình duyệt
+  window.addEventListener("popstate", handlePopState);
 });
 
 // Tải dữ liệu quiz từ file JSON
@@ -24,12 +27,67 @@ async function loadQuizData() {
     document.getElementById("loading").style.display = "none";
     document.getElementById("exam-selector").style.display = "block";
 
+    // Kiểm tra URL params để load đề thi từ URL
+    loadFromURL();
+
     // Hiển thị danh sách đề thi
     renderExamList();
   } catch (error) {
     console.error("Lỗi khi tải quiz:", error);
     document.getElementById("loading").style.display = "none";
     document.getElementById("error").classList.remove("d-none");
+  }
+}
+
+// Load trạng thái từ URL
+function loadFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const examParam = params.get("exam");
+  const pageParam = params.get("page");
+
+  if (examParam && allExams[examParam]) {
+    const page = pageParam ? parseInt(pageParam) : 1;
+    selectExam(examParam, page, false); // false = không update URL
+  }
+}
+
+// Xử lý sự kiện back/forward
+function handlePopState(event) {
+  if (event.state) {
+    if (event.state.exam) {
+      selectExam(event.state.exam, event.state.page, false);
+    } else {
+      // Quay lại trang chọn đề
+      document.getElementById("quiz-container").style.display = "none";
+      document.getElementById("exam-selector").style.display = "block";
+      currentExam = null;
+      scrollToTop();
+    }
+  }
+}
+
+// Cập nhật URL với trạng thái hiện tại
+function updateURL(pushState = true) {
+  if (!currentExam) return;
+
+  const params = new URLSearchParams();
+  params.set("exam", currentExam);
+  params.set("page", currentPage);
+
+  const newURL = `${window.location.pathname}?${params.toString()}`;
+
+  if (pushState) {
+    window.history.pushState(
+      { exam: currentExam, page: currentPage },
+      "",
+      newURL
+    );
+  } else {
+    window.history.replaceState(
+      { exam: currentExam, page: currentPage },
+      "",
+      newURL
+    );
   }
 }
 
@@ -51,11 +109,15 @@ function renderExamList() {
 }
 
 // Chọn đề thi
-function selectExam(examName) {
+function selectExam(examName, page = 1, updateUrl = true) {
   currentExam = examName;
   quizData = allExams[examName];
-  currentPage = 1;
-  userAnswers = {}; // Reset câu trả lời
+  currentPage = page;
+
+  // Không reset câu trả lời nếu đang ở cùng đề
+  if (updateUrl) {
+    userAnswers = {}; // Reset câu trả lời khi chọn đề mới
+  }
 
   // Ẩn danh sách đề, hiện quiz
   document.getElementById("exam-selector").style.display = "none";
@@ -64,14 +126,23 @@ function selectExam(examName) {
   // Cập nhật tiêu đề đề thi
   document.getElementById("current-exam-title").textContent = examName;
 
-  // Hiển thị trang đầu tiên
+  // Hiển thị trang
   renderQuiz();
   renderPagination();
+
+  // Cập nhật URL
+  if (updateUrl) {
+    updateURL(true);
+  }
 
   // Thêm sự kiện nút quay lại
   document.getElementById("back-to-exams").onclick = () => {
     document.getElementById("quiz-container").style.display = "none";
     document.getElementById("exam-selector").style.display = "block";
+    currentExam = null;
+
+    // Xóa params khỏi URL
+    window.history.pushState({}, "", window.location.pathname);
     scrollToTop();
   };
 }
@@ -408,6 +479,7 @@ function renderPagination() {
       currentPage--;
       renderQuiz();
       renderPagination();
+      updateURL();
     }
   });
   prevLi.appendChild(prevLink);
@@ -456,6 +528,7 @@ function renderPagination() {
       currentPage++;
       renderQuiz();
       renderPagination();
+      updateURL();
     }
   });
   nextLi.appendChild(nextLink);
@@ -475,6 +548,7 @@ function addPageButton(pagination, pageNum) {
     currentPage = pageNum;
     renderQuiz();
     renderPagination();
+    updateURL();
   });
   li.appendChild(link);
   pagination.appendChild(li);
