@@ -16,6 +16,40 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Chọn file JSON */
+#file-selector {
+  background: white;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease;
+}
+
+#file-selector .card-title {
+  color: #667eea;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.file-button {
+  padding: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+}
+
+.file-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.file-button:active {
+  transform: translateY(-1px);
+}
+
 /* Chọn đề thi */
 #exam-selector {
   background: white;

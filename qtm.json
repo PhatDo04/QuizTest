@@ -1,0 +1,898 @@
+[
+  {
+    "câu_hỏi": "Những địa chỉ mạng IPv4 nào là địa chỉ IP dành riêng?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "172.16.0.0  1"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "192.157.0.0"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "10.0.0.0"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "224.6.0.0"
+      },
+      {
+        "nhãn": "E",
+        "nội_dung": "172.32.0.0"
+      }
+    ],
+    "đáp_án": ["C", "A"]
+  },
+  {
+    "câu_hỏi": "Mục đích của NAT là gì?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "để truy cập internet"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "gán địa chỉ IP dành riêng cho máy tính định tuyến đối với địa chỉ IP dành riêng"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "cho phép các máy tính được định cấu hình với các địa chỉ IP công khai để"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "dịch địa chỉ IP dành riêng sang địa chỉ IP công khai truy cập internet"
+      }
+    ],
+    "đáp_án": ["D"]
+  },
+  {
+    "câu_hỏi": "Địa chỉ 128.168.10.26 thuộc lớp nào?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Lớp D"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Lớp C"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Lớp B"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Lớp A"
+      }
+    ],
+    "đáp_án": ["C"]
+  },
+  {
+    "câu_hỏi": "Đáp án nào dưới đây là địa chỉ lpv6 hợp lệ?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "2001:0AB:0:1002::102"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "2002:0000:0:ABC::AC::"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "2003::0AB:AC:1001"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "2001:0:ABC::C::AB"
+      }
+    ],
+    "đáp_án": ["C", "A"]
+  },
+  {
+    "câu_hỏi": "Phương pháp nào sau đây không phải là chiến lược chuyển đổi Ipv4-to-Ipv6?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Phương pháp đường hầm"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Dual Stack"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Phương pháp chuyển đổi"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "NAT-PT"
+      }
+    ],
+    "đáp_án": ["C"]
+  },
+  {
+    "câu_hỏi": "Chế độ cấu hình ở mức cao nhất đối với Router Cisco là?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Privileged EXEC Mode"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "User EXEC Mode"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Global Configuration Mode"
+      }
+    ],
+    "đáp_án": ["C"]
+  },
+  {
+    "câu_hỏi": "Một máy tính có thể truy cập các thiết bị trên cùng một mạng nhưng không thể truy cập các thiết bị trên các mạng khác. Nguyên nhân có thể là gì?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Máy tính có địa chỉ Default Gateway không hợp lệ."
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Máy tính có Subnet mask không chính xác"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Dây cáp không được kết nối đúng cách với NIC."
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Máy tính có địa chỉ IP không hợp lệ."
+      }
+    ],
+    "đáp_án": ["A"]
+  },
+  {
+    "câu_hỏi": "Một máy tính phải gửi một gói đến một host đích trong cùng một mạng LAN. Gói tin sẽ được gửi như thế nào?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Gói tin sẽ được gửi trực tiếp đến host đích."
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Trước tiên, gói sẽ được gửi đến Default gateway, sau đó từ Default gateway, gói tin sẽ được gửi trực tiếp đến host đích."
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Gói tin sẽ chỉ được gửi đến Default gateway."
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Gói sẽ được gửi đến Default gateway trước, sau đó, tùy thuộc vào phản hồi từ Gateway đó, gói tin có thể được gửi đến host đích."
+      }
+    ],
+    "đáp_án": ["A"]
+  },
+  {
+    "câu_hỏi": "OSPF thuộc loại giao thức định tuyến nào?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Định tuyến tĩnh"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Định tuyến trong IGP"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Cả 3 đều sai"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Định tuyến ngoài EGP"
+      }
+    ],
+    "đáp_án": ["B"]
+  },
+  {
+    "câu_hỏi": "Hai dịch vụ được cung cấp bởi lớp mạng OSI là gì?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Đặt các frame lên đường truyền vật lý"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Phát hiện va chạm"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Phát hiện lỗi"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Đóng gói các PDU từ tầng giao vận"
+      },
+      {
+        "nhãn": "E",
+        "nội_dung": "Định tuyến các gói tin đến đích"
+      }
+    ],
+    "đáp_án": ["D", "E"]
+  },
+  {
+    "câu_hỏi": "Đâu KHÔNG phải là một trong các điều kiện thiết lập Neighbor trong EIGRP?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Cùng AS"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Cùng hello-timer/die timer"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Cùng loại xác thực"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "2 router có subnet và subnet mask giống nhau"
+      }
+    ],
+    "đáp_án": ["B"]
+  },
+  {
+    "câu_hỏi": "Phát biểu nào sau đây đúng cho VLAN?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "VLAN là một tập hợp của các cổng trên switch nằm trong cùng miền quảng bá"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Sử dụng VLAN làm giảm khả năng bảo mật"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "VLAN là kỹ thuật được sử dụng trên switch để chia một switch vật lý thành nhiều switch luận lý"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "VLAN cho phép người quản trị tổ chức mạng theo cả luận lý và vật lý"
+      }
+    ],
+    "đáp_án": ["C", "A"]
+  },
+  {
+    "câu_hỏi": "Độ dài tiền tố (prefix length) của mặt nạ mạng 255.255.252.0 là bao nhiêu?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "/23"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "/20"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "/22"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "/21"
+      }
+    ],
+    "đáp_án": ["C"]
+  },
+  {
+    "câu_hỏi": "Mạng LAN có đặc điểm nào sau đây?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Có phạm vi hẹp, băng thông lớn, dễ quản trị mạng và giá thành thấp"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Có phạm vi hẹp, băng thông lớn, dễ quản trị và giá thành cao"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Có phạm vi rộng, băng thông lớn, quản trị mạng đơn giản"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Có phạm vi rộng, băng thông thấp, quản trị mạng phức tạp"
+      }
+    ],
+    "đáp_án": ["A"]
+  },
+  {
+    "câu_hỏi": "Có bao nhiêu địa chỉ host hợp lệ có sẵn trên mạng con IPv4 được cấu hình bằng mặt nạ /25?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "64"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "192"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "126"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "62"
+      }
+    ],
+    "đáp_án": ["C"]
+  },
+  {
+    "câu_hỏi": "Mạng WAN có đặc điểm nào sau đây?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Có phạm vi rộng, băng thông lớn, quản trị mạng đơn giản"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Có phạm vi rộng, băng thông thấp và quản trị mạng phức tạp"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Có phạm vi hẹp, băng thông thấp, dễ quản trị và giá thành cao"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Có phạm vi hẹp, băng thông lớn, dễ quản trị mạng và giá thành thấp"
+      }
+    ],
+    "đáp_án": ["B"]
+  },
+  {
+    "câu_hỏi": "Các giao thức lớp ứng dụng nào là một phần của bộ giao thức TCP/IP?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "FTP, ARP, NAT"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "DHCP, DNS, FTP"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "ARP, NAT, DHCP"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "NAT, FTP, DNS"
+      }
+    ],
+    "đáp_án": ["B"]
+  },
+  {
+    "câu_hỏi": "Khi địa chỉ IPv4 được định cấu hình thủ công trên máy chủ web, thuộc tính nào của cấu hình IPv4 xác định phần mạng và máy chủ cho địa chỉ IPv4?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Subnet mask"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Default Gateway"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Địa chỉ DHCP server"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Địa chỉ DNS server"
+      }
+    ],
+    "đáp_án": ["C"]
+  },
+  {
+    "câu_hỏi": "Tại lớp nào trong mô hình OSI, địa chỉ IP đích được thêm vào đơn vị dữ liệu PDU trong quá trình đóng gói?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Lớp trình diễn"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Lớp ứng dụng"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Lớp mạng"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Lớp giao vận"
+      }
+    ],
+    "đáp_án": ["C"]
+  },
+  {
+    "câu_hỏi": "Giao thức định tuyến nào sau đây là một giao thức định tuyến Classful?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Ripv1"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "EIGRP"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "OSPF"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Ripv2"
+      }
+    ],
+    "đáp_án": ["A"]
+  },
+  {
+    "câu_hỏi": "Địa chỉ 203.200.12.126/25 là địa chỉ gì?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Địa chỉ host"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Địa chỉ dành riêng"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Địa chỉ quảng bá"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Địa chỉ mạng"
+      }
+    ],
+    "đáp_án": ["A"]
+  },
+  {
+    "câu_hỏi": "Giao thức định tuyến nào có khoảng cách quản trị (AD) mặc định nhỏ nhất?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "IBGP"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "EIGRP"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "OSPF"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "RIP"
+      }
+    ],
+    "đáp_án": ["B"]
+  },
+  {
+    "câu_hỏi": "Cổng Switch (Switch port) nào sau đây chỉ có thể mang lưu lượng nhiều VLAN?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Không cổng nào"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Cổng access"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Cả hai"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Cổng trunk"
+      }
+    ],
+    "đáp_án": ["D"]
+  },
+  {
+    "câu_hỏi": "Địa chỉ nào dưới đây dùng cho địa chỉ host trên subnet 172.16.15.21/28?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "172.16.15.15"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "172.16.15.16"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "172.16.15.30"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "172.16.15.32"
+      },
+      {
+        "nhãn": "E",
+        "nội_dung": "172.16.15.19"
+      }
+    ],
+    "đáp_án": ["E", "C"]
+  },
+  {
+    "câu_hỏi": "Câu lệnh nào cấu hình định tuyến mặc định cho router?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "ip route 0.0.0.0 10.1.1.0 10.1.1."
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "ip route 0.0.0.0 0.0.0.0 10.1.1.1"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "ip default-gateway 10.1.1.0"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "ip default-route 10.1.1.0"
+      }
+    ],
+    "đáp_án": ["B"]
+  },
+  {
+    "câu_hỏi": "Quản trị viên muốn tạo bốn mạng con từ địa chỉ mạng 192.168.1.0/24. Địa chỉ mạng và mặt nạ mạng con của mạng con thứ ba là gì?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "192.168.1.64 255.255.255.240"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "192.168.1.32 255.255.255.240"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "192.168.1.128 255.255.255.192"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "192.168.1.64 255.255.255.192"
+      },
+      {
+        "nhãn": "E",
+        "nội_dung": "192.168.1.8 255.255.255.224"
+      }
+    ],
+    "đáp_án": ["C"]
+  },
+  {
+    "câu_hỏi": "Địa chỉ MAC là?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Một số 32 bits"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Một số 128 bits"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Một số 64 bits"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Một số 48 bits"
+      }
+    ],
+    "đáp_án": ["D"]
+  },
+  {
+    "câu_hỏi": "Trong header của IP packet có chứa:",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Địa chỉ IP nguồn và địa chỉ IP đích"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Địa chỉ IP nguồn và địa chỉ MAC nguồn"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Địa chỉ MAC nguồn và địa chỉ MAC đích"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Địa chỉ IP đích và địa chỉ MAC đích"
+      }
+    ],
+    "đáp_án": ["A"]
+  },
+  {
+    "câu_hỏi": "Các lệnh nào được sử dụng để thiết lập quyền truy cập an toàn vào bộ định tuyến thông qua kết nối giao diện console?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "login"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "line console 0"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "enable secret cisco"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "password cisco"
+      },
+      {
+        "nhãn": "E",
+        "nội_dung": "line vty 0 4"
+      }
+    ],
+    "đáp_án": ["A", "D", "B"]
+  },
+  {
+    "câu_hỏi": "Đặc điểm nào mô tả Default gateway của máy chủ?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "địa chỉ vật lý của router interface trên cùng một mạng với máy host"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "địa chỉ logic được gán cho cổng switch kết nối với router"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "địa chỉ logic của router interface trên cùng một mạng với máy host"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "địa chỉ vật lý của cổng Switch kết nối với máy host"
+      }
+    ],
+    "đáp_án": ["C"]
+  },
+  {
+    "câu_hỏi": "Tham khảo hình ảnh dưới đây. Khi 1 gửi một gói tin đến, gói tin đó có địa chỉ nguồn và đích nào khi nó đến giao diện Gi0/0 trên bộ định tuyến R2?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "IP nguồn là 10.10.1.1 và IP đích là 10.10.2.2"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "IP nguồn là 192.168.10.10 và IP đích là 10.10.2.2"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "IP nguồn là 192.168.20.10 và IP đích là 192.168.20.1"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "IP nguồn là 192.168.10.10 và IP đích là 192.168.20.10"
+      }
+    ],
+    "đáp_án": ["D"]
+  },
+  {
+    "câu_hỏi": "Các cách viết địa chỉ IPv6 nào sau đây đúng?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "FECO:ABCD:ACDH:0067::2A4"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "2004:1:25A4:668F::1"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "2001::130F:099A::12A"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "2002:7654:A1AD:81AF:CCACD"
+      }
+    ],
+    "đáp_án": ["B"]
+  },
+  {
+    "câu_hỏi": "Lệnh nào được sử dụng để định cấu hình tuyến tĩnh default route IPv6?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "ip route 0.0.0.0/0 interface next-hop"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "ipv6 route ::/0 interface next-hop"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "ipv6 route default interface next-hop"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "ipv6 route 0.0.0.0/0 interface next-hop"
+      }
+    ],
+    "đáp_án": ["B"]
+  },
+  {
+    "câu_hỏi": "Một kỹ sư phải cấu hình mạng con với subnet /30 giữa hai Router. Địa chỉ IP và mặt nạ mạng con nào có thể sử dụng để đáp ứng tiêu chí này?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "ip address 10.2.1.3 255.255.255.252"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "ip address 172.16.1.4 255.255.255.248"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "ip address 209.165.201.2 255.255.255.252"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "ip address 192.168.1.1 255.255.255.248"
+      }
+    ],
+    "đáp_án": ["C"]
+  },
+  {
+    "câu_hỏi": "Một gói được chuyển đến đích có IP là 10.10.1.22. Phải cấu hình dòng lệnh định tuyến nào để Router chuyển tiếp gói tin đến đích?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "ip route 10.10.1.20 255.255.255.252 10.10.255.1"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "ip route 10.10.1.20 255.255.255.254 10.10.255.1"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "ip route 10.10.1.0 255.255.255.240 10.10.255.1"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "ip route 10.10.1.16 255.255.255.252 10.10.255.1"
+      }
+    ],
+    "đáp_án": ["A"]
+  },
+  {
+    "câu_hỏi": "Cho mô hình mạng bên dưới. Nên cấu hình chế độ nào cho cổng G0/1 của Switch để các VLAN có thể được định tuyến qua router R1?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "trunk"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "auto"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "native"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "access"
+      }
+    ],
+    "đáp_án": ["A"]
+  },
+  {
+    "câu_hỏi": "Cho mô hình mạng dưới đây. Những phát biểu nào sau đây là đúng trong mô hình mạng trên?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Subnet mask được sử dụng là 255.255.255.192"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Địa chỉ IP 172.16.1.128 có thể được gán cho các host thuộc VLAN2"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Địa chỉ IP 172.16.1.127 có thể được gán cho các host thuộc VLAN1"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Subnet mask được sử dụng là 255.255.255.128"
+      }
+    ],
+    "đáp_án": ["D"]
+  },
+  {
+    "câu_hỏi": "Cho địa chỉ IP của một máy tính là: 192.168.1.150; Subnet mask: 255.255.255.224. Địa chỉ máy tính này thuộc dải host nào dưới đây?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "192.168.1.64-192.168.1.160"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "192.168.1.129-192.168.1.158"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "192.168.1.129-192.168.1.190"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "192.168.1.129-192.168.254"
+      }
+    ],
+    "đáp_án": ["B"]
+  },
+  {
+    "câu_hỏi": "Quản trị viên thực hiện cấu hình giao thức định tuyến OSPF trên router R1 như sau:\nR1(config)# router ospf 11\nR1(config-router)# network 10.10.10.0 0.0.0.255 area 0\nSố 11 ở lệnh đầu biểu thị điều gì?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "Số hệ thống tự trị AS mà R1 thuộc về"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "Vùng area mà R1 thuộc về"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "Chi phí (cost) của đường link đến R1"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "Tiến trình OSPF trên R1"
+      }
+    ],
+    "đáp_án": ["D"]
+  },
+  {
+    "câu_hỏi": "Để kiểm tra interface fa0/5 có được gán cho VLAN Sales không, thì ta sử dụng lệnh nào sau đây?",
+    "lựa_chọn": [
+      {
+        "nhãn": "A",
+        "nội_dung": "show vtp status"
+      },
+      {
+        "nhãn": "B",
+        "nội_dung": "show ip interface brief"
+      },
+      {
+        "nhãn": "C",
+        "nội_dung": "show spanning-tree root"
+      },
+      {
+        "nhãn": "D",
+        "nội_dung": "show vlan"
+      }
+    ],
+    "đáp_án": ["D"]
+  }
+]

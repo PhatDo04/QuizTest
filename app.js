@@ -5,23 +5,53 @@ let quizData = []; // Câu hỏi của đề đang chọn
 let currentExam = null; // Đề đang làm
 let currentPage = 1;
 let userAnswers = {};
+let currentFile = null; // File JSON đang sử dụng
+let isQtmFormat = false; // Kiểm tra định dạng qtm.json
 
 // Khởi tạo ứng dụng
 document.addEventListener("DOMContentLoaded", () => {
-  loadQuizData();
+  setupFileSelector();
 
   // Xử lý sự kiện back/forward của trình duyệt
   window.addEventListener("popstate", handlePopState);
 });
 
+// Thiết lập chọn file
+function setupFileSelector() {
+  const fileButtons = document.querySelectorAll(".file-button");
+  fileButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const fileName = button.getAttribute("data-file");
+      loadQuizData(fileName);
+    });
+  });
+}
+
 // Tải dữ liệu quiz từ file JSON
-async function loadQuizData() {
+async function loadQuizData(fileName) {
   try {
-    const response = await fetch("quiz.json");
+    currentFile = fileName;
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("file-selector").style.display = "none";
+    document.getElementById("exam-selector").style.display = "none";
+    document.getElementById("error").classList.add("d-none");
+
+    const response = await fetch(fileName);
     if (!response.ok) {
       throw new Error("Không thể tải dữ liệu quiz");
     }
-    allExams = await response.json();
+    const data = await response.json();
+
+    // Kiểm tra định dạng và chuyển đổi nếu cần
+    if (Array.isArray(data)) {
+      // Định dạng qtm.json - mảng các câu hỏi
+      isQtmFormat = true;
+      allExams = convertQtmFormat(data);
+    } else {
+      // Định dạng quiz.json - object chứa các đề
+      isQtmFormat = false;
+      allExams = data;
+    }
 
     // Ẩn loading, hiện danh sách đề
     document.getElementById("loading").style.display = "none";
@@ -35,8 +65,50 @@ async function loadQuizData() {
   } catch (error) {
     console.error("Lỗi khi tải quiz:", error);
     document.getElementById("loading").style.display = "none";
+    document.getElementById("file-selector").style.display = "block";
     document.getElementById("error").classList.remove("d-none");
   }
+}
+
+// Chuyển đổi định dạng qtm.json sang định dạng quiz.json
+function convertQtmFormat(data) {
+  const questionsPerExam = 50;
+  const totalExams = Math.ceil(data.length / questionsPerExam);
+  const exams = {};
+
+  for (let i = 0; i < totalExams; i++) {
+    const startIdx = i * questionsPerExam;
+    const endIdx = Math.min(startIdx + questionsPerExam, data.length);
+    const examQuestions = data.slice(startIdx, endIdx);
+
+    const examName = `Đề ${i + 1} (Q. ${startIdx + 1} -> Q. ${endIdx})`;
+
+    exams[examName] = examQuestions.map((q, idx) => {
+      const questionNumber = startIdx + idx + 1;
+
+      // Xử lý đáp án - ghép nhãn và nội dung
+      const answers = q.lựa_chọn.map(
+        (option) => `${option.nhãn}. ${option.nội_dung}`
+      );
+
+      // Tìm đáp án đúng - có thể nhiều đáp án
+      const correctAnswers = q.đáp_án.map((label) => {
+        const option = q.lựa_chọn.find((opt) => opt.nhãn === label);
+        return option ? `${option.nhãn}. ${option.nội_dung}` : "";
+      });
+
+      return {
+        Câu: `Q. ${questionNumber}: ${q.câu_hỏi}`,
+        "các đáp án": answers,
+        "đáp án đúng": correctAnswers.join(" | "),
+        "nguồn ảnh": null,
+        "là multichoice": q.đáp_án.length > 1, // Đánh dấu câu nhiều đáp án
+        "các đáp án đúng": q.đáp_án, // Lưu mảng các nhãn đáp án đúng
+      };
+    });
+  }
+
+  return exams;
 }
 
 // Load trạng thái từ URL
@@ -140,6 +212,21 @@ function selectExam(examName, page = 1, updateUrl = true) {
     document.getElementById("quiz-container").style.display = "none";
     document.getElementById("exam-selector").style.display = "block";
     currentExam = null;
+
+    // Xóa params khỏi URL
+    window.history.pushState({}, "", window.location.pathname);
+    scrollToTop();
+  };
+
+  // Thêm sự kiện nút đổi file
+  document.getElementById("back-to-files").onclick = () => {
+    document.getElementById("quiz-container").style.display = "none";
+    document.getElementById("exam-selector").style.display = "none";
+    document.getElementById("file-selector").style.display = "block";
+    currentExam = null;
+    currentFile = null;
+    allExams = {};
+    userAnswers = {};
 
     // Xóa params khỏi URL
     window.history.pushState({}, "", window.location.pathname);
@@ -291,8 +378,13 @@ function createQuestionCard(question, questionIndex) {
 
   cardBody.appendChild(questionText);
 
-  // Tự động tạo đường dẫn ảnh từ số câu hỏi
-  const imagePath = getImagePathFromQuestion(question["Câu"]);
+  // Chỉ tự động tìm ảnh cho quiz.json, không áp dụng cho qtm.json
+  const shouldAutoLoadImage = !isQtmFormat;
+
+  // Tự động tạo đường dẫn ảnh từ số câu hỏi (chỉ cho quiz.json)
+  const imagePath = shouldAutoLoadImage
+    ? getImagePathFromQuestion(question["Câu"])
+    : null;
 
   // Hiển thị ảnh nếu có đường dẫn hoặc nguồn ảnh được chỉ định
   const imageSource = question["nguồn ảnh"] || imagePath;
@@ -332,12 +424,25 @@ function createQuestionCard(question, questionIndex) {
   const answersDiv = document.createElement("div");
   answersDiv.className = "answers mt-3";
 
+  // Kiểm tra xem có phải câu multichoice không
+  const isMultichoice = question["là multichoice"] || false;
+
+  // Thêm hướng dẫn nếu là multichoice
+  if (isMultichoice) {
+    const instruction = document.createElement("p");
+    instruction.className = "text-info fw-bold mb-2";
+    instruction.innerHTML = "📌 <em>Câu hỏi có nhiều đáp án đúng</em>";
+    answersDiv.appendChild(instruction);
+  }
+
   question["các đáp án"].forEach((answer, answerIndex) => {
     const answerOption = createAnswerOption(
       answer,
       questionIndex,
       answerIndex,
-      question["đáp án đúng"]
+      question["đáp án đúng"],
+      isMultichoice,
+      question["các đáp án đúng"]
     );
     answersDiv.appendChild(answerOption);
   });
@@ -355,16 +460,41 @@ function createQuestionCard(question, questionIndex) {
   // Restore previous answer if exists
   if (userAnswers[questionIndex] !== undefined) {
     setTimeout(() => {
-      const radio = document.querySelector(
-        `input[name="question-${questionIndex}"][value="${userAnswers[questionIndex]}"]`
-      );
-      if (radio) {
-        radio.checked = true;
-        showFeedback(
-          questionIndex,
-          userAnswers[questionIndex],
-          question["đáp án đúng"]
+      if (isMultichoice) {
+        // Khôi phục nhiều checkbox
+        const selectedAnswers = userAnswers[questionIndex];
+        selectedAnswers.forEach((ansIdx) => {
+          const checkbox = document.querySelector(
+            `input[name="question-${questionIndex}"][value="${ansIdx}"]`
+          );
+          if (checkbox) {
+            checkbox.checked = true;
+          }
+        });
+        // Hiển thị feedback
+        if (selectedAnswers.length > 0) {
+          showFeedback(
+            questionIndex,
+            selectedAnswers,
+            question["đáp án đúng"],
+            isMultichoice,
+            question["các đáp án đúng"]
+          );
+        }
+      } else {
+        // Khôi phục radio button
+        const radio = document.querySelector(
+          `input[name="question-${questionIndex}"][value="${userAnswers[questionIndex]}"]`
         );
+        if (radio) {
+          radio.checked = true;
+          showFeedback(
+            questionIndex,
+            userAnswers[questionIndex],
+            question["đáp án đúng"],
+            isMultichoice
+          );
+        }
       }
     }, 0);
   }
@@ -372,14 +502,21 @@ function createQuestionCard(question, questionIndex) {
   return card;
 }
 
-// Tạo tùy chọn đáp án (radio button)
-function createAnswerOption(answer, questionIndex, answerIndex, correctAnswer) {
+// Tạo tùy chọn đáp án (radio button hoặc checkbox)
+function createAnswerOption(
+  answer,
+  questionIndex,
+  answerIndex,
+  correctAnswer,
+  isMultichoice = false,
+  correctAnswerLabels = []
+) {
   const div = document.createElement("div");
   div.className = "form-check answer-option";
 
   const input = document.createElement("input");
   input.className = "form-check-input";
-  input.type = "radio";
+  input.type = isMultichoice ? "checkbox" : "radio";
   input.name = `question-${questionIndex}`;
   input.id = `q${questionIndex}-a${answerIndex}`;
   input.value = answerIndex;
@@ -391,7 +528,13 @@ function createAnswerOption(answer, questionIndex, answerIndex, correctAnswer) {
 
   // Thêm sự kiện lắng nghe để phản hồi ngay lập tức
   input.addEventListener("change", () => {
-    handleAnswerSelection(questionIndex, answerIndex, correctAnswer);
+    handleAnswerSelection(
+      questionIndex,
+      answerIndex,
+      correctAnswer,
+      isMultichoice,
+      correctAnswerLabels
+    );
   });
 
   div.appendChild(input);
@@ -401,45 +544,124 @@ function createAnswerOption(answer, questionIndex, answerIndex, correctAnswer) {
 }
 
 // Xử lý khi chọn đáp án
-function handleAnswerSelection(questionIndex, selectedAnswer, correctAnswer) {
-  // Lưu câu trả lời của người dùng
-  userAnswers[questionIndex] = selectedAnswer;
+function handleAnswerSelection(
+  questionIndex,
+  selectedAnswer,
+  correctAnswer,
+  isMultichoice = false,
+  correctAnswerLabels = []
+) {
+  if (isMultichoice) {
+    // Lấy tất cả các checkbox đã chọn
+    const checkboxes = document.querySelectorAll(
+      `input[name="question-${questionIndex}"]:checked`
+    );
+    const selectedAnswers = Array.from(checkboxes).map((cb) =>
+      parseInt(cb.value)
+    );
 
-  // Hiển thị phản hồi
-  showFeedback(questionIndex, selectedAnswer, correctAnswer);
+    // Lưu câu trả lời của người dùng (mảng các index)
+    userAnswers[questionIndex] = selectedAnswers;
+
+    // Hiển thị phản hồi
+    showFeedback(
+      questionIndex,
+      selectedAnswers,
+      correctAnswer,
+      isMultichoice,
+      correctAnswerLabels
+    );
+  } else {
+    // Lưu câu trả lời của người dùng (single choice)
+    userAnswers[questionIndex] = selectedAnswer;
+
+    // Hiển thị phản hồi
+    showFeedback(questionIndex, selectedAnswer, correctAnswer, isMultichoice);
+  }
 }
 
 // Hiển thị phản hồi cho đáp án đã chọn
-function showFeedback(questionIndex, selectedAnswer, correctAnswer) {
+function showFeedback(
+  questionIndex,
+  selectedAnswer,
+  correctAnswer,
+  isMultichoice = false,
+  correctAnswerLabels = []
+) {
   const feedbackDiv = document.getElementById(`feedback-${questionIndex}`);
   const questionCard = document.getElementById(`question-${questionIndex}`);
 
-  // Lấy nội dung đáp án đã chọn
-  const selectedAnswerText =
-    quizData[questionIndex]["các đáp án"][selectedAnswer];
+  let isCorrect = false;
 
-  // Kiểm tra đáp án có đúng không
-  const isCorrect = correctAnswer.startsWith(selectedAnswerText.charAt(0));
+  if (isMultichoice) {
+    // Xử lý multichoice - selectedAnswer là mảng các index
+    const selectedAnswers = Array.isArray(selectedAnswer)
+      ? selectedAnswer
+      : [selectedAnswer];
 
-  // Cập nhật style cho tất cả các tùy chọn đáp án
-  const answerOptions = questionCard.querySelectorAll(".answer-option");
-  answerOptions.forEach((option, index) => {
-    option.classList.remove("correct-answer", "wrong-answer");
+    // Lấy nhãn của các đáp án đã chọn (A, B, C, D, E)
+    const selectedLabels = selectedAnswers
+      .map((idx) => {
+        const answerText = quizData[questionIndex]["các đáp án"][idx];
+        return answerText.charAt(0);
+      })
+      .sort();
 
-    const answerText = quizData[questionIndex]["các đáp án"][index];
-    const isThisCorrect = correctAnswer.startsWith(answerText.charAt(0));
+    // So sánh với các đáp án đúng
+    const correctLabels = correctAnswerLabels.sort();
+    isCorrect =
+      selectedLabels.length === correctLabels.length &&
+      selectedLabels.every((label, idx) => label === correctLabels[idx]);
 
-    if (index === selectedAnswer) {
-      if (isCorrect) {
+    // Cập nhật style cho tất cả các tùy chọn đáp án
+    const answerOptions = questionCard.querySelectorAll(".answer-option");
+    answerOptions.forEach((option, index) => {
+      option.classList.remove("correct-answer", "wrong-answer");
+
+      const answerText = quizData[questionIndex]["các đáp án"][index];
+      const answerLabel = answerText.charAt(0);
+      const isThisCorrect = correctLabels.includes(answerLabel);
+      const isSelected = selectedAnswers.includes(index);
+
+      if (isSelected) {
+        if (isThisCorrect) {
+          option.classList.add("correct-answer");
+        } else {
+          option.classList.add("wrong-answer");
+        }
+      } else if (isThisCorrect) {
+        // Làm nổi bật đáp án đúng chưa được chọn
         option.classList.add("correct-answer");
-      } else {
-        option.classList.add("wrong-answer");
       }
-    } else if (!isCorrect && isThisCorrect) {
-      // Làm nổi bật đáp án đúng nếu người dùng chọn sai
-      option.classList.add("correct-answer");
-    }
-  });
+    });
+  } else {
+    // Xử lý single choice - selectedAnswer là số
+    const selectedAnswerText =
+      quizData[questionIndex]["các đáp án"][selectedAnswer];
+
+    // Kiểm tra đáp án có đúng không
+    isCorrect = correctAnswer.startsWith(selectedAnswerText.charAt(0));
+
+    // Cập nhật style cho tất cả các tùy chọn đáp án
+    const answerOptions = questionCard.querySelectorAll(".answer-option");
+    answerOptions.forEach((option, index) => {
+      option.classList.remove("correct-answer", "wrong-answer");
+
+      const answerText = quizData[questionIndex]["các đáp án"][index];
+      const isThisCorrect = correctAnswer.startsWith(answerText.charAt(0));
+
+      if (index === selectedAnswer) {
+        if (isCorrect) {
+          option.classList.add("correct-answer");
+        } else {
+          option.classList.add("wrong-answer");
+        }
+      } else if (!isCorrect && isThisCorrect) {
+        // Làm nổi bật đáp án đúng nếu người dùng chọn sai
+        option.classList.add("correct-answer");
+      }
+    });
+  }
 
   // Hiển thị thông báo phản hồi
   if (isCorrect) {
